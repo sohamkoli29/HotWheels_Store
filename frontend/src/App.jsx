@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Search, Filter, ShoppingCart, Car, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 import './App.css';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_BASE + '/api';
+
+
 
 function App() {
   const [hotwheels, setHotwheels] = useState([]);
