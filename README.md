@@ -2,7 +2,7 @@
 
 A full-stack e-commerce application for HotWheels cars built with React + Vite frontend and Node.js + Express backend using Supabase database.
 
-![HotWheels Store](https://raw.githubusercontent.com/sohamkoli29/HotWheels_Store/main/images/Red%20Line%20Club.png)
+![HotWheels Store](https://github.com/sohamkoli29/HotWheels_Store/blob/main/images/hotstore.png?raw=true)
 
 ##  Features
 
