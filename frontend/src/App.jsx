@@ -4,7 +4,8 @@ import axios from 'axios';
 import Checkout from './components/Checkout';
 import './App.css';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = `${import.meta.env.VITE_API_BASE}/api`;
+
 
 function App() {
   const [hotwheels, setHotwheels] = useState([]);
