@@ -30,24 +30,27 @@ A full-stack e-commerce application for HotWheels cars built with React + Vite f
 - **Supabase** - PostgreSQL database
 - **CORS** - Cross-origin resource sharing
 
-##  Project Structure
-- hotwheels-store/
-├── frontend/ # React Vite application
-│ ├── src/
-│ │ ├── components/
-│ │ │ └── Checkout.jsx # Checkout page component
-│ │ ├── App.jsx # Main application component
-│ │ ├── main.jsx # Application entry point
-│ │ └── App.css # Stylesheets
-│ ├── package.json
-│ └── vite.config.js
-├── backend/ # Node.js Express API
-│ ├── server.js # Express server
-│ ├── package.json
-│ └── .env.example
-├── images/ # HotWheels product images
-├── .gitignore # Git ignore rules
-└── README.md # Project documentation
+## 🏗️ Project Structure
+
+```bash
+hotwheels-store/
+├── frontend/                # React Vite application
+│   ├── src/
+│   │   ├── components/
+│   │   │   └── Checkout.jsx   # Checkout page component
+│   │   ├── App.jsx            # Main application component
+│   │   ├── main.jsx           # Application entry point
+│   │   └── App.css            # Stylesheets
+│   ├── package.json
+│   └── vite.config.js
+├── backend/                 # Node.js Express API
+│   ├── server.js             # Express server
+│   ├── package.json
+│   └── .env.example
+├── images/                  # HotWheels product images
+├── .gitignore               # Git ignore rules
+└── README.md                # Project documentation
+```
 
 
 ##  Quick Start
