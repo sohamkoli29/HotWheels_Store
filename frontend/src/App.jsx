@@ -1,11 +1,10 @@
-import  { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Filter, ShoppingCart, Car, AlertCircle } from 'lucide-react';
 import axios from 'axios';
+import Checkout from './components/Checkout';
 import './App.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE + '/api';
-
-
+const API_BASE = 'http://localhost:5000/api';
 
 function App() {
   const [hotwheels, setHotwheels] = useState([]);
@@ -16,6 +15,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [backendConnected, setBackendConnected] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
 
   // Test backend connection on component mount
   useEffect(() => {
@@ -78,7 +78,32 @@ function App() {
     setCart(cart.filter(item => item.cartId !== cartId));
   };
 
+  const handleCheckout = () => {
+    setShowCheckout(true);
+  };
+
+  const handleBackFromCheckout = () => {
+    setShowCheckout(false);
+  };
+
+  const handleOrderComplete = () => {
+    setCart([]);
+    setShowCheckout(false);
+  };
+
   const totalCartPrice = cart.reduce((total, item) => total + (item.price || 0), 0);
+
+  // If checkout is shown, render Checkout component
+  if (showCheckout) {
+    return (
+      <Checkout 
+        cart={cart}
+        totalPrice={totalCartPrice}
+        onBack={handleBackFromCheckout}
+        onOrderComplete={handleOrderComplete}
+      />
+    );
+  }
 
   return (
     <div className="app">
@@ -175,14 +200,17 @@ function App() {
               ) : (
                 hotwheels.map((hotwheel) => (
                   <div key={hotwheel.id} className="hotwheel-card">
-                    <img 
-                      src={hotwheel.image_url} 
-                      alt={hotwheel.name}
-                      className="hotwheel-image"
-                      onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1566474591190-88d7c4dbb13f?w=400';
-                      }}
-                    />
+                    <div className="image-container">
+                      <img 
+                        src={hotwheel.image_url} 
+                        alt={hotwheel.name}
+                        className="hotwheel-image"
+                        onError={(e) => {
+                          e.target.src = 'https://images.unsplash.com/photo-1566474591190-88d7c4dbb13f?w=400&h=300&fit=crop';
+                        }}
+                        loading="lazy"
+                      />
+                    </div>
                     <div className="hotwheel-info">
                       <h3>{hotwheel.name}</h3>
                       <p className="series">{hotwheel.series}</p>
@@ -219,7 +247,7 @@ function App() {
                   src={item.image_url} 
                   alt={item.name}
                   onError={(e) => {
-                    e.target.src = 'https://images.unsplash.com/photo-1566474591190-88d7c4dbb13f?w=100';
+                    e.target.src = 'https://images.unsplash.com/photo-1566474591190-88d7c4dbb13f?w=100&h=100&fit=crop';
                   }}
                 />
                 <div className="cart-item-info">
@@ -237,7 +265,9 @@ function App() {
           </div>
           <div className="cart-total">
             <strong>Total: ${totalCartPrice.toFixed(2)}</strong>
-            <button className="checkout-btn">Checkout</button>
+            <button className="checkout-btn" onClick={handleCheckout}>
+              Checkout
+            </button>
           </div>
         </div>
       )}
